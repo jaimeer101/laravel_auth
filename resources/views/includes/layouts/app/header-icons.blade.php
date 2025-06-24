@@ -146,9 +146,9 @@
                 
                 @foreach($notificationsList as $notif)
                     <a href="#" class="relative flex items-center gap-3 p-2 duration-200 rounded-xl pr-10 hover:bg-secondery dark:hover:bg-white/10 bg-teal-500/5">
-                        <div class="relative w-12 h-12 shrink-0"> <img src="assets/images/avatars/avatar-3.jpg" alt="" class="object-cover w-full h-full rounded-full"></div>
+                        <div class="relative w-12 h-12 shrink-0"> <img src="{{ config("defaults.users_profile") }}" alt="" class="object-cover w-full h-full rounded-full"></div>
                         <div class="flex-1 ">
-                            <p> <b class="font-bold mr-1"> Alexa Gray</b> started following you. Welcome him to your profile. 👋 </p>
+                            <p> {{ $notif->notifications->notifications_description }} </p>
                             <div class="text-xs text-gray-500 mt-1.5 dark:text-white/80"> 4 hours ago </div>
                             <div class="w-2.5 h-2.5 bg-teal-600 rounded-full absolute right-3 top-5"></div>
                         </div>

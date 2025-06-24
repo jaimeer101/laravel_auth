@@ -19,9 +19,14 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $emailName = "";
+        if(isset($request->user()->email)){
+            list($emailName, $emailServer) = explode("@", $request->user()->email);
+        }
         
-        return view('profile.edit', [
+        return view('profile.index', [
             'user' => $request->user(),
+            'userEmail' => $emailName
         ]);
     }
 

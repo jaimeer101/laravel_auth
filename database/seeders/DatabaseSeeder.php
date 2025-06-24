@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             //PostSeeder::class, 
             //ReactionsSeeder::class,
             //PostsReactionsSeeder::class,
-            PostsCommentsSeeder::class,
+            // PostsCommentsSeeder::class,
+            // UsersAttributesSeeder::class,
+            AdditionalUsersAttributesSeeder::class,
         ]);
 
     }

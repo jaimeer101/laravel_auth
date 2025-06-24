@@ -17,7 +17,7 @@ class Post extends Model
 
     protected $appends = ['display_date'];
     public function users() {
-        return $this->hasOne(User::class,'id','users_id');
+        return $this->belongsTo(User::class, 'users_id','id');
     }
 
     public function posts_reactions() {

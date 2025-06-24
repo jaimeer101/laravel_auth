@@ -11,6 +11,8 @@ class Notifications extends Model
 
     protected $fillable = [];
 
+    protected $table = "tbl_notifications";
+    
     public function users(){
         return $this->belongsTo(User::class, 'id', 'users_id');
     }

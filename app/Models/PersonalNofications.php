@@ -13,11 +13,11 @@ class PersonalNofications extends Model
     protected $table = "tbl_personal_notifications";
 
     public function users(){
-        return $this->belongsTo(User::class,'id', 'users_id');
+        return $this->belongsTo(User::class,'users_id', 'id');
     }
 
     public function notifications(){
-        return $this->hasMany(Notifications::class,'id','notifications_id');
+        return $this->belongsTo(Notifications::class,'notifications_id', 'id');
     }
 
     public function get_users_notifications($usersId){
