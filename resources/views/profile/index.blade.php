@@ -26,15 +26,11 @@
                 <nav class="uk-slider-container overflow-hidden nav__underline px-6 p-0 border-transparent -mb-px">
                     <ul class="uk-slider-items w-[calc(100%+10px)] !overflow-hidden" 
                         uk-switcher="connect: #setting_tab ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium">
-                        <li class="w-auto pr-2.5"> 
-                            <a href="#">Personal Information</a> 
-                        </li>
-                        <li class="w-auto pr-2.5"> 
-                            <a href="#">Password</a> 
-                        </li>
-                        <li class="w-auto pr-2.5"> 
-                            <a href="#">Settings</a> 
-                        </li>
+                        @foreach ($profilesCategory as $category)
+                            <li class="w-auto pr-2.5"> 
+                                <a href="#">{{ $category->attributes_category_name }}</a> 
+                            </li>
+                        @endforeach
                     </ul>
                 </nav>
                 <a class="absolute -translate-y-1/2 top-1/2 left-0 flex items-center w-20 h-full p-2 py-1 justify-start bg-gradient-to-r from-white via-white dark:from-slate-800 dark:via-slate-800" href="#" uk-slider-item="previous"> 
@@ -45,7 +41,14 @@
                 </a>
             </div>
             <div id="setting_tab" class="uk-switcher md:py-12 md:px-20 p-6 overflow-hidden text-black text-sm">
-                @include('includes.pages.profiles.personal_information')
+                @foreach ($profilesCategory as $category)
+                    @php
+                        $includePage = "includes.pages.profiles.".$category->attributes_category_code;
+                    @endphp
+                    
+                    @include($includePage, ["category" => $category])
+                @endforeach
+                
             </div>
         </div>
     </div>

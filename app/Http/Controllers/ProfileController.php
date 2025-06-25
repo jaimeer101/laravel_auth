@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttributesCategory;
 use App\Models\Post;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\UsersAttributes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,16 +19,18 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
     public function edit(Request $request): View
     {
         $emailName = "";
         if(isset($request->user()->email)){
             list($emailName, $emailServer) = explode("@", $request->user()->email);
         }
-        
+        $profilesCategory = (new AttributesCategory())->get_pages_category(1);
         return view('profile.index', [
             'user' => $request->user(),
-            'userEmail' => $emailName
+            'userEmail' => $emailName, 
+            'profilesCategory' => $profilesCategory
         ]);
     }
 
@@ -66,5 +70,19 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function save(Request $request){
+        $rules = array();
+        $usersAttributes = (new UsersAttributes())->get_personal_info_attributes();
+        foreach($usersAttributes as $attr){
+            $fieldName = $attr->input_code."_".$attr->code;
+            $rules[$fieldName] = 'required';
+        }
+        $request->validate($rules);
+        return Redirect::route('profile.index')->with('status', 'profile-updated');
+        // echo "<pre>";
+        // print_r($usersAttributes);
+        // echo "</pre>";
     }
 }

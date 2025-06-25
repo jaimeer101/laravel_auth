@@ -139,9 +139,10 @@
                 @endforeach
             </div>
         </div>
+        @include("includes.pages.feeds.right-side")
     </div>
     
-    @include("includes.pages.feeds.right-side")
+    
     <x-slot name="modal">
         @include("includes.modals.feeds.post-preview")
         @include("includes.modals.feeds.create-status")
