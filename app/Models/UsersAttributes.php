@@ -21,4 +21,19 @@ class UsersAttributes extends Model
         $response = self::where($usersProfileCondition)->get();
         return $response;
     }
+
+    public function get_required_personal_info_attributes(){
+        $usersProfileCondition = [['category_id', '=', '1'], ['id', '!=', '7'], ['required', '=', '1']];
+        $response = self::where($usersProfileCondition)->get();
+        return $response;
+    }
+
+    public function get_editable_personal_info(){
+        $editableAttributes = [1,2,3,4,6];
+        $usersProfileCondition = [[]];
+        $response = self::where('category_id', '=', '1')
+                        ->whereIn('id', $editableAttributes)
+                        ->get();
+        return $response;
+    }
 }

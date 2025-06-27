@@ -17,8 +17,10 @@ Route::get('/admin', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/{page}', [ProfileController::class, 'edit'])->name('profile.page');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile', [ProfileController::class, 'save_personal_info'])->name('profile.save_personal_info');
+    Route::post('save_password', [ProfileController::class, 'save_password'])->name('profile.save_password');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/dashboard', [FeedController::class, 'index'])->name('dashboard');
     //CRUD of POST

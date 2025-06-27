@@ -48,7 +48,6 @@
                     
                     @include($includePage, ["category" => $category])
                 @endforeach
-                
             </div>
         </div>
     </div>
