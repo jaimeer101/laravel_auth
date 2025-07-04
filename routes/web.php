@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile', [ProfileController::class, 'save_personal_info'])->name('profile.save_personal_info');
     Route::post('save_password', [ProfileController::class, 'save_password'])->name('profile.save_password');
+    Route::post('save_profile', [ProfileController::class, 'save_profile'])->name('profile.save_profile');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/dashboard', [FeedController::class, 'index'])->name('dashboard');
     //CRUD of POST

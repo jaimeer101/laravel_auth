@@ -12,4 +12,8 @@ class Reactions extends Model
        'code','name','icon'
     ];
     protected $table = 'tbl_reactions';
+
+    public function posts_reactions() {
+        return $this->hasMany(PostsReactions::class,'reactions_id','id');
+    }
 }

@@ -28,22 +28,24 @@ class ProfileController extends Controller
         $this->users_details = new UsersDetails();
     }
 
-    public function edit(Request $request): View
+    public function edit($page = null): View
     {
         $emailName = "";
-        if(isset($request->user()->email)){
-            list($emailName, $emailServer) = explode("@", $request->user()->email);
+        if(isset(Auth::user()->email)){
+            list($emailName, $emailServer) = explode("@", Auth::user()->email);
         }
         $age = $this->users_details->get_users_age(Auth::user()->id);
-    
+        
         //dd($age);
        
         $profilesCategory = (new AttributesCategory())->get_pages_category(1);
+        $page = $page == "" ? $profilesCategory[0]->attributes_category_code : $page;
         return view('profile.index', [
-            'user' => $request->user(),
+            'user' => Auth::user(),
             'userEmail' => $emailName, 
             'profilesCategory' => $profilesCategory, 
-            'age' => $age["age"]
+            'age' => $age["age"], 
+            "page" => $page
         ]);
     }
 
@@ -149,20 +151,31 @@ class ProfileController extends Controller
                 $messages[$fieldName.".current_password"] = $attr->name." is not correct.";
             }
         }
-        // echo "<pre>";
-        // print_r($rules);
-        // echo "</pre>";
-        // echo "<pre>";
-        // print_r($messages);
-        // echo "</pre>";
-        // exit();
         $request->validate($rules, $messages);
+        $saveUsers = $this->users_details->save_users_details($passwordAttributes, $request, Auth::user()->id);
+        if(!is_numeric($saveUsers)){
+            $type = "danger";
+            $message = $saveUsers;
+        }
+
+        if($type == ""){
+            $user = Auth::user();
+            $user->password = Hash::make($request->txt_new_password);
+            $user->save();
+            $type = "success";
+            $message = "Password Update Done!";
+        }
+
+        $response = array(
+            "type"=> $type,
+            "message" => $message
+        );
         // echo "test";
         // echo "<pre>";
         // print_r($request->validate($rules, $messages));
         // echo "</pre>";
         // exit();
         $activePage = "password";
-        return redirect()->route('profile.edit')->with("active_page", $activePage);
+        return redirect()->route('profile.page', [$activePage])->with($response);
     }
 }

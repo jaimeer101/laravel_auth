@@ -24,6 +24,16 @@ class FeedController extends Controller
     }
     public function index(){
         //echo csrf_token();
+        // sample connectivity - dont erase - Jaimeer
+        // $sample = PostsReactions::with("posts", "reactions")->get();
+        // foreach($sample as $samp){
+        //     echo $samp->id;
+        //     echo "<pre>";
+        //     print_r($samp->reactions()->get());
+        //     echo "</pre>";
+           
+        // }
+        //  exit;
         $title = Auth::check() ? "Feed" : "";
         $postCondition = Auth::check() ? [["users_id", "!=", Auth::id()]] : "";
         $postList = $this->post->get_posts_2($postCondition, 10);

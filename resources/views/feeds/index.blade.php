@@ -72,7 +72,11 @@
                                                 echo "</pre>";*/
                                                 $userReact = $post->posts_reactions()->where("users_id", Auth::id())->exists();
                                                 if($userReact){
-                                                    $userReactDetails = $post->posts_reactions()->where("users_id", Auth::id())->first();
+                                                    //dd($post->posts_reactions()->with('reactions')->first()->reactions()->get());
+                                                    $userReactDetails = $post->posts_reactions()->with('reactions')->where("users_id", Auth::id())->first();
+                                                    /*echo "<pre>";
+                                                    print_r($userReactDetails->reactions()->first());
+                                                    echo "</pre>";*/
                                                     $userReactionIcon = $userReactDetails->reactions_id == $reactions->id ? "" : "-outline";
                                                     
                                                 }

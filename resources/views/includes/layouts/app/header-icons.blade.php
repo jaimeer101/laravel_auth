@@ -7,8 +7,8 @@
             </svg>
         <ion-icon name="add-circle-outline" class="sm:hidden text-2xl "></ion-icon>
     </button>
-    <div    class="hidden bg-white p-4 rounded-lg overflow-hidden drop-shadow-xl dark:bg-slate-700 md:w-[324px] w-screen border2"
-            uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right ">
+    <div class="hidden bg-white p-4 rounded-lg overflow-hidden drop-shadow-xl dark:bg-slate-700 md:w-[324px] w-screen border2"
+         uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right ">
         
             <h3 class="font-bold text-md"> Create  </h3>
 
@@ -287,14 +287,14 @@
 
     <!-- profile -->
     <div  class="rounded-full relative bg-secondery cursor-pointer shrink-0">
-        <img src="{{ config("defaults.users_profile") }}" alt="" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
+        <img src="{{ asset(config("defaults.users_profile")) }}" alt="" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
     </div>
     <div  class="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 w-64 border2"
         uk-drop="offset:6;pos: bottom-right;animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right ">
         
         <a href="timeline.html">
             <div class="p-4 py-5 flex items-center gap-4">
-                <img src="{{ config("defaults.users_profile") }}" alt="" class="w-10 h-10 rounded-full shadow">
+                <img src="{{ asset(config("defaults.users_profile")) }}" alt="" class="w-10 h-10 rounded-full shadow">
                 <div class="flex-1">
                     <h4 class="text-sm font-medium text-black">{{ $name }}</h4>
                     <div class="text-sm mt-1 text-blue-600 font-light dark:text-white/70">{{ '@'.$emailName }}</div>
